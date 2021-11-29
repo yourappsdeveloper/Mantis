@@ -86,7 +86,7 @@ public class CropViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         
-        adjustRatioAccordingToCropShapeType()
+        adjustRatioForSquareRatioCropShapeType()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -94,13 +94,16 @@ public class CropViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    private func adjustRatioAccordingToCropShapeType() {
+    @discardableResult
+    private func adjustRatioForSquareRatioCropShapeType() -> Bool {
         switch config.cropShapeType {
         case .circle, .square, .heart:
             self.config.presetFixedRatioType = .alwaysUsingOnePresetFixedRatio(ratio: 1)
+            return true
         default:
             ()
         }
+        return false
     }
     
     fileprivate func createRatioSelector() {
@@ -256,7 +259,10 @@ public class CropViewController: UIViewController {
         cropView.clipsToBounds = true
         cropView.cropShapeType = config.cropShapeType
         cropView.cropVisualEffectType = config.cropVisualEffectType
-        
+        setCropViewForeFixedRatio()
+    }
+    
+    private func setCropViewForeFixedRatio() {
         if case .alwaysUsingOnePresetFixedRatio = config.presetFixedRatioType {
             cropView.forceFixedRatio = true
         } else {
@@ -446,8 +452,11 @@ public class CropViewController: UIViewController {
         cropShapePresenter?.present(by: self, in: presentSourceView)
         cropShapePresenter?.didSelectShape = {[weak self] shapeType in
             self?.config.cropShapeType = shapeType
-            self?.adjustRatioAccordingToCropShapeType()
-            self?.cropView.resetCropMask(by: shapeType)
+            if self?.adjustRatioForSquareRatioCropShapeType() == true {
+                self?.setFixedRatio(1.0)
+            }
+            self?.setCropViewForeFixedRatio()
+            self?.cropView.resetCropMask(by: shapeType)            
         }
     }
     

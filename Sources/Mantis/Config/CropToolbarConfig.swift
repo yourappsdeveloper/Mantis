@@ -17,7 +17,7 @@ public struct CropToolbarConfig {
     public var toolbarButtonOptions: ToolbarButtonOptions = .default
     public var presetRatiosButtonSelected = false
     
-    public var cropShapeCandidates: [CropShapeType] = [.rect, .square, .circle()]
+    public var cropShapeCandidates: [CropShapeTypeCandidate] = [CropShapeTypeCandidate(shapeType: .rect)]
 
     var mode: CropToolbarMode = .normal
     var includeFixedRatioSettingButton = true

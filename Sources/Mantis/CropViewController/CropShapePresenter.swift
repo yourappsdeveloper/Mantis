@@ -7,12 +7,22 @@
 
 import UIKit
 
+public struct CropShapeTypeCandidate {
+    public var shapeType: CropShapeType = .rect
+    public var title: String?
+    
+    public init(shapeType: CropShapeType, title: String? = nil) {
+        self.shapeType = shapeType
+        self.title = title
+    }
+}
+
 class CropShapePresenter {
     var didSelectShape: ((CropShapeType)->Void) = { _ in }
     private var type: CropShapeType = .rect
-    private var candidates: [CropShapeType] = []
+    private var candidates: [CropShapeTypeCandidate] = []
     
-    init(type: CropShapeType = .rect, candidates: [CropShapeType]) {
+    init(type: CropShapeType = .rect, candidates: [CropShapeTypeCandidate]) {
         self.type = type
         self.candidates = candidates
     }
@@ -20,11 +30,11 @@ class CropShapePresenter {
     func present(by viewController: UIViewController, in sourceView: UIView) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        for shape in candidates {
-
-            let action = UIAlertAction(title: shape.title, style: .default) {[weak self] _ in
+        for candidate in candidates {
+            let title = candidate.title ?? candidate.shapeType.title
+            let action = UIAlertAction(title: title, style: .default) {[weak self] _ in
                 guard let self = self else { return }
-                self.didSelectShape(shape)
+                self.didSelectShape(candidate.shapeType)
             }
             actionSheet.addAction(action)
         }

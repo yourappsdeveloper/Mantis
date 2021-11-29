@@ -148,7 +148,10 @@ class ViewController: UIViewController, CropViewControllerDelegate {
         
         var config = Mantis.Config()
         config.cropToolbarConfig.toolbarButtonOptions = [.clockwiseRotate, .reset, .ratio, .alterCropper90Degree, .cropShape];
-        config.cropToolbarConfig.cropShapeCandidates = [.rect, .square, .circle(maskOnly: false)]
+        config.cropToolbarConfig.cropShapeCandidates = [CropShapeTypeCandidate(shapeType: .rect),
+                                                        CropShapeTypeCandidate(shapeType: .square, title: "Square"),
+                                                        CropShapeTypeCandidate(shapeType: .circle()),
+                                                        CropShapeTypeCandidate(shapeType: .diamond(), title: "💎")]
         
         let cropViewController = Mantis.cropViewController(image: image,
                                                            config: config)
