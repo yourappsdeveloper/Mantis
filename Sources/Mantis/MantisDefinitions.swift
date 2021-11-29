@@ -20,6 +20,5 @@ public typealias Transformation = (
 
 public typealias CropInfo = (translation: CGPoint, rotation: CGFloat, scale: CGFloat, cropSize: CGSize, imageViewSize: CGSize)
 
-
 typealias OverlayEdgeType = (xDelta: CGFloat, yDelta: CGFloat)
 typealias TappedEdgeCropFrameUpdateRule = [CropViewOverlayEdge: OverlayEdgeType]

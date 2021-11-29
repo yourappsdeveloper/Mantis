@@ -16,6 +16,11 @@ public protocol CropToolbarDelegate: AnyObject {
     func didSelectSetRatio()
     func didSelectRatio(ratio: Double)
     func didSelectAlterCropper90Degree()
+    func didSelectCropShape()
+}
+
+public extension CropToolbarDelegate {
+    func didSelectCropShape() {}
 }
 
 public protocol CropToolbarProtocol: UIView {    

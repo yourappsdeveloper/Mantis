@@ -18,6 +18,7 @@ public struct ToolbarButtonOptions: OptionSet {
     static public let reset = ToolbarButtonOptions(rawValue: 1 << 2)
     static public let ratio = ToolbarButtonOptions(rawValue: 1 << 3)
     static public let alterCropper90Degree = ToolbarButtonOptions(rawValue: 1 << 4)
+    static public let cropShape = ToolbarButtonOptions(rawValue: 1 << 5)
     
     static public let `default`: ToolbarButtonOptions = [counterclockwiseRotate,
                                                          reset,
@@ -26,5 +27,6 @@ public struct ToolbarButtonOptions: OptionSet {
     static public let all: ToolbarButtonOptions = [counterclockwiseRotate,
                                                    clockwiseRotate,
                                                    reset,
-                                                   ratio]
+                                                   ratio,
+                                                   cropShape]
 }

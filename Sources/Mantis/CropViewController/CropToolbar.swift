@@ -26,8 +26,9 @@ public class CropToolbar: UIView, CropToolbarProtocol {
     var counterClockwiseRotationButton: UIButton?
     var clockwiseRotationButton: UIButton?
     var alterCropper90DegreeButton: UIButton?
+    var cropShapeButton: UIButton?
     var cropButton: UIButton?
-
+    
     var config: CropToolbarConfig!
 
     private var optionButtonStackView: UIStackView?
@@ -89,6 +90,11 @@ public class CropToolbar: UIView, CropToolbarProtocol {
     private func createSetRatioButton() {
         fixedRatioSettingButton = createOptionButton(withTitle: nil, andAction: #selector(setRatio))
         fixedRatioSettingButton?.setImage(ToolBarButtonImageBuilder.clampImage(), for: .normal)
+    }
+    
+    private func createCropShapeButton() {
+        let buttonText = LocalizedHelper.getString("Mantis.CropShape", value: "CropShape")
+        cropShapeButton = createOptionButton(withTitle: buttonText, andAction: #selector(showCropShapeCandidates))
     }
 
     private func createCropButton() {
@@ -176,6 +182,11 @@ public class CropToolbar: UIView, CropToolbarProtocol {
                 }
             }
         }
+        
+        if config.toolbarButtonOptions.contains(.cropShape) {
+            createCropShapeButton()
+            addButtonsToContainer(button: cropShapeButton)
+        }
 
         if config.mode == .normal {
             createCropButton()
@@ -185,6 +196,10 @@ public class CropToolbar: UIView, CropToolbarProtocol {
 
     public func getRatioListPresentSourceView() -> UIView? {
         return fixedRatioSettingButton
+    }
+    
+    public func getCropShapePresentSourceView() -> UIView? {
+        return cropShapeButton
     }
 
     public func respondToOrientationChange() {
@@ -239,6 +254,10 @@ public class CropToolbar: UIView, CropToolbarProtocol {
 
     @objc private func alterCropper90Degree(_ sender: Any) {
         cropToolbarDelegate?.didSelectAlterCropper90Degree()
+    }
+    
+    @objc private func showCropShapeCandidates(_ sender: Any) {
+        cropToolbarDelegate?.didSelectCropShape()
     }
 
     @objc private func crop(_ sender: Any) {

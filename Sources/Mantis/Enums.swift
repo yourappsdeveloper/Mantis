@@ -28,6 +28,7 @@ public enum CropVisualEffectType {
 }
 
 public enum CropShapeType {
+    
     case rect
 
     /**
@@ -65,6 +66,29 @@ public enum CropShapeType {
       Each point should have normailzed values whose range is 0...1
      */
     case path(points: [CGPoint], maskOnly: Bool = false)
+    
+    var title: String {
+        switch self {
+        case .rect:
+            return "rect"
+        case .square:
+            return "square"
+        case .ellipse:
+            return "ellipse"
+        case .circle:
+            return "circle"
+        case .roundedRect:
+            return "rounded rect"
+        case .diamond:
+            return "diamond"
+        case .heart:
+            return "heart"
+        case .polygon:
+            return "polygon"
+        case .path:
+            return "custom path"
+        }
+    }
 }
 
 public enum RatioCandidatesShowType {
