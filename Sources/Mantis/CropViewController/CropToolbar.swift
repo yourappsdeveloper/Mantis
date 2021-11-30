@@ -93,8 +93,13 @@ public class CropToolbar: UIView, CropToolbarProtocol {
     }
     
     private func createCropShapeButton() {
-        let buttonText = LocalizedHelper.getString("Mantis.CropShape", value: "CropShape")
-        cropShapeButton = createOptionButton(withTitle: buttonText, andAction: #selector(showCropShapeCandidates))
+        if let cropShapeIcon = config.toolbarButtonOptions.cropShapeIcon {
+            cropShapeButton = createOptionButton(withTitle: nil, andAction: #selector(showCropShapeCandidates))
+            cropShapeButton?.setImage(cropShapeIcon, for: .normal)
+        } else {
+            let buttonText = config.toolbarButtonOptions.cropShapeTitle ?? LocalizedHelper.getString("Mantis.CropShapes", value: "Crop Shapes")
+            cropShapeButton = createOptionButton(withTitle: buttonText, andAction: #selector(showCropShapeCandidates))
+        }
     }
 
     private func createCropButton() {
@@ -183,7 +188,7 @@ public class CropToolbar: UIView, CropToolbarProtocol {
             }
         }
         
-        if config.toolbarButtonOptions.contains(.cropShape) {
+        if config.toolbarButtonOptions.contains(.cropShape) {            
             createCropShapeButton()
             addButtonsToContainer(button: cropShapeButton)
         }

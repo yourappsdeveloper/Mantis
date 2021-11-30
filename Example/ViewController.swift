@@ -148,6 +148,13 @@ class ViewController: UIViewController, CropViewControllerDelegate {
         
         var config = Mantis.Config()
         config.cropToolbarConfig.toolbarButtonOptions = [.clockwiseRotate, .reset, .ratio, .alterCropper90Degree, .cropShape];
+        config.cropToolbarConfig.toolbarButtonOptions.cropShapeTitle = "Crop Shape"
+        if #available(iOS 13.0, *) {
+            config.cropToolbarConfig.toolbarButtonOptions.cropShapeIcon = UIImage(systemName: "edit")
+        } else {
+            // Fallback on earlier versions
+        }
+        
         config.cropToolbarConfig.cropShapeCandidates = [CropShapeTypeCandidate(shapeType: .rect),
                                                         CropShapeTypeCandidate(shapeType: .square, title: "Square"),
                                                         CropShapeTypeCandidate(shapeType: .circle()),
