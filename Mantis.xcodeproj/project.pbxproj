@@ -32,6 +32,7 @@
 		66F909BF287D22E7007E2FC6 /* ToolBarButtonImageBuilder+DrawImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F909BE287D22E7007E2FC6 /* ToolBarButtonImageBuilder+DrawImage.swift */; };
 		8EFB6F6725D16B0F00C0DDB2 /* MantisLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F3525D154D900C0DDB2 /* MantisLocalizable.strings */; };
 		8EFB6FB125D187A000C0DDB2 /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F5425D16A9E00C0DDB2 /* Resource.bundle */; };
+		9A574370288167BA00E6E51A /* CropViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57436F288167BA00E6E51A /* CropViewConfig.swift */; };
 		FEDAAD8625205CC300D95667 /* RatioSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAD8525205CC300D95667 /* RatioSelector.swift */; };
 		FEDAAD8C25205DE900D95667 /* RatioItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAD8B25205DE900D95667 /* RatioItemView.swift */; };
 		OBJ_100 /* RotationDialPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* RotationDialPlate.swift */; };
@@ -94,6 +95,13 @@
 			remoteGlobalIDString = 8EFB6F5325D16A9E00C0DDB2;
 			remoteInfo = "Mantis-Resource";
 		};
+		9A5743682881664C00E6E51A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A57435A2881664C00E6E51A /* Demo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9A5743422881662F00E6E51A;
+			remoteInfo = Demo;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +128,15 @@
 		8EFB6F4125D154D900C0DDB2 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MantisLocalizable.strings; sourceTree = "<group>"; };
 		8EFB6F4225D154D900C0DDB2 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/MantisLocalizable.strings"; sourceTree = "<group>"; };
 		8EFB6F5425D16A9E00C0DDB2 /* Resource.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Resource.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A57435A2881664C00E6E51A /* Demo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Demo.xcodeproj; sourceTree = "<group>"; };
+		9A57435E2881664C00E6E51A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9A57435F2881664C00E6E51A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9A5743612881664C00E6E51A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9A5743632881664C00E6E51A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9A5743642881664C00E6E51A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9A5743652881664C00E6E51A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A5743662881664C00E6E51A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		9A57436F288167BA00E6E51A /* CropViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewConfig.swift; sourceTree = "<group>"; };
 		E86127BD26206D01008365BC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MantisLocalizable.strings; sourceTree = "<group>"; };
 		FEDAAD8525205CC300D95667 /* RatioSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioSelector.swift; sourceTree = "<group>"; };
 		FEDAAD8B25205DE900D95667 /* RatioItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioItemView.swift; sourceTree = "<group>"; };
@@ -204,6 +221,38 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		9A5743592881664C00E6E51A /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				9A57435A2881664C00E6E51A /* Demo.xcodeproj */,
+				9A57435D2881664C00E6E51A /* Demo */,
+			);
+			name = Demo;
+			path = ../Demo;
+			sourceTree = "<group>";
+		};
+		9A57435B2881664C00E6E51A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A5743692881664C00E6E51A /* Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9A57435D2881664C00E6E51A /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				9A57435E2881664C00E6E51A /* ViewController.swift */,
+				9A57435F2881664C00E6E51A /* Assets.xcassets */,
+				9A5743602881664C00E6E51A /* LaunchScreen.storyboard */,
+				9A5743622881664C00E6E51A /* Main.storyboard */,
+				9A5743642881664C00E6E51A /* AppDelegate.swift */,
+				9A5743652881664C00E6E51A /* Info.plist */,
+				9A5743662881664C00E6E51A /* SceneDelegate.swift */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
 		OBJ_11 /* CropView */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +266,7 @@
 				OBJ_19 /* CropView.swift */,
 				OBJ_20 /* CropViewModel.swift */,
 				OBJ_21 /* CropViewStatus.swift */,
+				9A57436F288167BA00E6E51A /* CropViewConfig.swift */,
 				OBJ_22 /* ImageContainer.swift */,
 			);
 			path = CropView;
@@ -288,6 +338,7 @@
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_50 /* Tests */,
+				9A5743592881664C00E6E51A /* Demo */,
 				OBJ_54 /* Products */,
 				OBJ_57 /* Images */,
 				OBJ_59 /* MantisTests */,
@@ -467,6 +518,12 @@
 			mainGroup = OBJ_5;
 			productRefGroup = OBJ_54 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9A57435B2881664C00E6E51A /* Products */;
+					ProjectRef = 9A57435A2881664C00E6E51A /* Demo.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				"Mantis::Mantis" /* Mantis */,
@@ -477,6 +534,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9A5743692881664C00E6E51A /* Demo.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Demo.app;
+			remoteRef = 9A5743682881664C00E6E51A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8EFB6F3325D1548800C0DDB2 /* Resources */ = {
@@ -586,6 +653,7 @@
 				OBJ_97 /* RotationCalculator.swift in Sources */,
 				OBJ_98 /* RotationDial+Touches.swift in Sources */,
 				OBJ_99 /* RotationDial.swift in Sources */,
+				9A574370288167BA00E6E51A /* CropViewConfig.swift in Sources */,
 				6659429D2877DAE80096A5DB /* Config.swift in Sources */,
 				OBJ_100 /* RotationDialPlate.swift in Sources */,
 				OBJ_101 /* RotationDialViewModel.swift in Sources */,
@@ -632,6 +700,22 @@
 				E86127BD26206D01008365BC /* nl */,
 			);
 			name = MantisLocalizable.strings;
+			sourceTree = "<group>";
+		};
+		9A5743602881664C00E6E51A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A5743612881664C00E6E51A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		9A5743622881664C00E6E51A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A5743632881664C00E6E51A /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

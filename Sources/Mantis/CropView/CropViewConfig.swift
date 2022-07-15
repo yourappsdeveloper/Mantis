@@ -1,3 +1,10 @@
+//
+//  CropViewConfig.swift
+//  Mantis
+//
+//  Created by Aleksandr on 15.07.2022.
+//
+
 import UIKit
 
 public struct CropViewConfig {
