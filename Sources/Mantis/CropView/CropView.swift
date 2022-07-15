@@ -65,6 +65,7 @@ class CropView: UIView {
                                                        cropShapeType: cropShapeType,
                                                        cropVisualEffectType: cropVisualEffectType)
 
+    var cropEnable = true
     var manualZoomed = false
     private var cropFrameKVO: NSKeyValueObservation?
     var forceFixedRatio = false

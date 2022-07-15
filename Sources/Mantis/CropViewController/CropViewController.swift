@@ -182,23 +182,37 @@ public class CropViewController: UIViewController {
             self?.cropToolbar.alpha = 0
             
         } completion: { [weak self] _ in
-            
             self?.mainToolbar.isHidden = true
             self?.cropToolbar.isHidden = true
             
             switch state {
             case .main:
-                self?.mainToolbar.alpha = 1
                 self?.mainToolbar.isHidden = false
+                UIView.animate(withDuration: 0.25) { self?.mainToolbar.alpha = 1 }
+                self?.setCropEnable(false)
+                
             case .crop:
-                self?.cropToolbar.alpha = 1
                 self?.cropToolbar.isHidden = false
+                self?.setCropEnable(true)
+                UIView.animate(withDuration: 0.25) { self?.cropToolbar.alpha = 1 }
+                
             case .paint:
                 break
+                
             case .colorControl:
                 break
             }
         }
+    }
+    
+    private func setCropEnable(_ isEnable: Bool) {
+        cropView.gridOverlayView.isHidden = !isEnable
+        cropView.rotationDial?.isHidden = !isEnable
+        cropView.scrollView.isScrollEnabled = isEnable
+        cropView.angleDashboardHeight = isEnable ? 60 : 0
+        cropView.cropEnable = isEnable
+        if isEnable { rotated() }
+        
     }
     
     fileprivate func getFixedRatioManager() -> FixedRatioManager {

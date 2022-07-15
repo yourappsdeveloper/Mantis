@@ -10,6 +10,8 @@ import UIKit
 
 extension CropView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        guard cropEnable else { return nil}
+        
         let hotAreaUnit = cropViewConfig.hotAreaUnit
 
         let newPoint = self.convert(point, to: self)
@@ -33,10 +35,8 @@ extension CropView {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        
-        guard touches.count == 1, let touch = touches.first else {
-            return
-        }
+
+        guard cropEnable, touches.count == 1, let touch = touches.first else { return }
         
         // A resize event has begun by grabbing the crop UI, so notify delegate
         delegate?.cropViewDidBeginResize(self)
@@ -53,7 +53,7 @@ extension CropView {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         
-        guard touches.count == 1, let touch = touches.first else {
+        guard cropEnable, touches.count == 1, let touch = touches.first else {
             return
         }
         
@@ -67,6 +67,7 @@ extension CropView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
+        guard cropEnable else { return }
         
         if viewModel.needCrop() {
             gridOverlayView.handleEdgeUntouched()
