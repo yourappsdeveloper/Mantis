@@ -40,7 +40,7 @@ public protocol CropToolbarConfigProtocol {
     var optionButtonFontSize: CGFloat { get set }
     var optionButtonFontSizeForPad: CGFloat { get set }
     
-    var toolbarButtonOptions: ToolbarButtonOptions { get set }
+    var toolbarButtonOptions: CropToolbarButtonOptions { get set }
     
     // The properties below are required by CropViewController and for some specific scenarios
     // Most of time you can set just their default values as CropToolbarConfig does
@@ -79,6 +79,35 @@ public protocol CropToolbarConfigProtocol {
     var mode: CropToolbarMode { get set }
 }
 
+public protocol MainToolbarConfigProtocol {
+    var heightForVerticalOrientation: CGFloat { get set }
+    var widthForHorizontalOrientation: CGFloat { get set }
+
+    var backgroundColor: UIColor { get set }
+    var foregroundColor: UIColor { get set }
+    
+    var optionButtonFontSize: CGFloat { get set }
+    var optionButtonFontSizeForPad: CGFloat { get set }
+}
+
+// MARK: - MainToolbarConfig
+public struct MainToolbarConfig: MainToolbarConfigProtocol {
+    public var heightForVerticalOrientation: CGFloat = 44
+    public var widthForHorizontalOrientation: CGFloat = 80
+
+    public var optionButtonFontSize: CGFloat = 14
+    public var optionButtonFontSizeForPad: CGFloat = 20
+
+    /**
+     The color settings are not for Mac Catalyst (Optimize Interface for Mac) for now
+     I haven't figured out a correct way to set button title color for this scenario
+     */
+    public var backgroundColor: UIColor = .black
+    public var foregroundColor: UIColor = .white
+    
+    public init() {}
+}
+
 // MARK: - CropToolbarConfig
 public struct CropToolbarConfig: CropToolbarConfigProtocol {
     public var heightForVerticalOrientation: CGFloat = 44
@@ -94,7 +123,7 @@ public struct CropToolbarConfig: CropToolbarConfigProtocol {
     public var backgroundColor: UIColor = .black
     public var foregroundColor: UIColor = .white
 
-    public var toolbarButtonOptions: ToolbarButtonOptions = .default
+    public var toolbarButtonOptions: CropToolbarButtonOptions = .default
     public var ratioCandidatesShowType: RatioCandidatesShowType = .presentRatioListFromButton
     public var fixedRatiosShowType: FixedRatiosShowType = .adaptive
     public var presetRatiosButtonSelected = false
@@ -115,6 +144,8 @@ public struct Config {
     public var showRotationDial = true
     public var dialConfig = DialConfig()
     public var cropToolbarConfig: CropToolbarConfigProtocol = CropToolbarConfig()
+    public var mainToolbarConfig: MainToolbarConfigProtocol = MainToolbarConfig()
+
     public private(set) var localizationConfig = Mantis.localizationConfig
     public var showAttachedCropToolbar = true
 

@@ -33,18 +33,22 @@ public protocol CropViewControllerDelegate: AnyObject {
     func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage)
     
     func cropViewControllerDidBeginResize(_ cropViewController: CropViewController)
-    func cropViewControllerDidEndResize(_ cropViewController: CropViewController, original: UIImage, cropInfo: CropInfo)    
+    func cropViewControllerDidEndResize(_ cropViewController: CropViewController, original: UIImage, cropInfo: CropInfo)
 }
 
 public extension CropViewControllerDelegate where Self: UIViewController {
     func cropViewControllerDidFailToCrop(_ cropViewController: CropViewController, original: UIImage) {}
     func cropViewControllerDidBeginResize(_ cropViewController: CropViewController) {}
-    func cropViewControllerDidEndResize(_ cropViewController: CropViewController, original: UIImage, cropInfo: CropInfo) {}   
+    func cropViewControllerDidEndResize(_ cropViewController: CropViewController, original: UIImage, cropInfo: CropInfo) {}
 }
 
 public enum CropViewControllerMode {
     case normal
-    case customizable    
+    case customizable
+}
+
+public enum CropViewControllerState {
+    case main, crop, paint, colorControl
 }
 
 public class CropViewController: UIViewController {
@@ -61,14 +65,16 @@ public class CropViewController: UIViewController {
     public var config = Mantis.Config()
     
     private var orientation: UIInterfaceOrientation = .unknown
-
+    private var state: CropViewControllerState = .main
+    
     private lazy var cropView = CropView(
         image: image,
         cropViewConfig: config.cropViewConfig,
         dialConfig: config.dialConfig
     )
-
+    
     private var cropToolbar: CropToolbarProtocol
+    private var mainToolbar: MainToolbarProtocol
     private var ratioPresenter: RatioPresenter?
     private var ratioSelector: RatioSelector?
     private var stackView: UIStackView?
@@ -83,25 +89,28 @@ public class CropViewController: UIViewController {
     init(image: UIImage,
          config: Mantis.Config = Mantis.Config(),
          mode: CropViewControllerMode = .normal,
-         cropToolbar: CropToolbarProtocol = CropToolbar(frame: CGRect.zero)) {
-        self.image = image
+         cropToolbar: CropToolbarProtocol = CropToolbar(frame: CGRect.zero),
+         mainToolbar: MainToolbarProtocol = MainToolbar(frame: CGRect.zero)) {
         
+        self.image = image
         self.config = config
-
+        
         switch config.cropShapeType {
         case .circle, .square, .heart:
             self.config.presetFixedRatioType = .alwaysUsingOnePresetFixedRatio(ratio: 1)
         default:
             ()
-        }        
+        }
         
         self.mode = mode
+        self.mainToolbar = mainToolbar
         self.cropToolbar = cropToolbar
         
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
+        self.mainToolbar = MainToolbar(frame: CGRect.zero)
         self.cropToolbar = CropToolbar(frame: CGRect.zero)
         super.init(coder: aDecoder)
     }
@@ -119,29 +128,34 @@ public class CropViewController: UIViewController {
         
         switch config.presetFixedRatioType {
         case .alwaysUsingOnePresetFixedRatio(let ratio):
-                config.cropToolbarConfig.includeFixedRatiosSettingButton = false
-                                
-                if case .none = config.presetTransformationType {
-                    setFixedRatio(ratio)
-                }
-                
+            config.cropToolbarConfig.includeFixedRatiosSettingButton = false
+            
+            if case .none = config.presetTransformationType {
+                setFixedRatio(ratio)
+            }
+            
         case .canUseMultiplePresetFixedRatio(let defaultRatio):
-                if defaultRatio > 0 {
-                    setFixedRatio(defaultRatio)
-                    cropView.aspectRatioLockEnabled = true
-                    config.cropToolbarConfig.presetRatiosButtonSelected = true
-                }
-                
-                config.cropToolbarConfig.includeFixedRatiosSettingButton = true
+            if defaultRatio > 0 {
+                setFixedRatio(defaultRatio)
+                cropView.aspectRatioLockEnabled = true
+                config.cropToolbarConfig.presetRatiosButtonSelected = true
+            }
+            
+            config.cropToolbarConfig.includeFixedRatiosSettingButton = true
         }
-                
+        
         if mode == .normal {
             config.cropToolbarConfig.mode = .normal
         } else {
             config.cropToolbarConfig.mode = .simple
         }
         
-        cropToolbar.createToolbarUI(config: config.cropToolbarConfig)                
+        cropToolbar.createToolbarUI(config: config.cropToolbarConfig)
+    }
+    
+    fileprivate func createMainToolbar() {
+        mainToolbar.mainToolbarDelegate = self
+        mainToolbar.createToolbarUI(config: config.mainToolbarConfig)
     }
     
     private func getRatioType() -> RatioType {
@@ -152,6 +166,38 @@ public class CropViewController: UIViewController {
             return .horizontal
         case .vertical:
             return .vertical
+        }
+    }
+    
+    private func changeState(to state: CropViewControllerState) {
+        guard self.state != state else { return }
+        self.state = state
+        updateUI(for: state)
+    }
+    
+    private func updateUI(for state: CropViewControllerState) {
+        
+        UIView.animate(withDuration: 0.25, delay: 0, options: []) { [weak self] in
+            self?.mainToolbar.alpha = 0
+            self?.cropToolbar.alpha = 0
+            
+        } completion: { [weak self] _ in
+            
+            self?.mainToolbar.isHidden = true
+            self?.cropToolbar.isHidden = true
+            
+            switch state {
+            case .main:
+                self?.mainToolbar.alpha = 1
+                self?.mainToolbar.isHidden = false
+            case .crop:
+                self?.cropToolbar.alpha = 1
+                self?.cropToolbar.isHidden = false
+            case .paint:
+                break
+            case .colorControl:
+                break
+            }
         }
     }
     
@@ -173,12 +219,13 @@ public class CropViewController: UIViewController {
         
         createCropView()
         createCropToolbar()
+        createMainToolbar()
         if config.cropToolbarConfig.ratioCandidatesShowType == .alwaysShowRatioList
             && config.cropToolbarConfig.includeFixedRatiosSettingButton {
             createRatioSelector()
         }
         initLayout()
-        updateLayout()        
+        updateLayout()
     }
     
     override public func viewDidLayoutSubviews() {
@@ -202,7 +249,7 @@ public class CropViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         cropView.prepareForDeviceRotation()
         rotated()
-    }    
+    }
     
     @objc func rotated() {
         let currentOrientation = Orientation.interfaceOrientation
@@ -227,7 +274,7 @@ public class CropViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             self?.cropView.handleRotate()
         }
-    }    
+    }
     
     private func setFixedRatio(_ ratio: Double, zoom: Bool = true) {
         cropToolbar.handleFixedRatioSetted(ratio: ratio)
@@ -255,7 +302,7 @@ public class CropViewController: UIViewController {
         cropView.clipsToBounds = true
         cropView.cropShapeType = config.cropShapeType
         cropView.cropVisualEffectType = config.cropVisualEffectType
-                
+        
         if case .alwaysUsingOnePresetFixedRatio = config.presetFixedRatioType {
             cropView.forceFixedRatio = true
         } else {
@@ -369,7 +416,7 @@ public class CropViewController: UIViewController {
     }
     
     private func handleCancel() {
-        delegate?.cropViewControllerDidCancel(self, original: image)
+        changeState(to: .main)
     }
     
     private func resetRatioButton() {
@@ -444,9 +491,9 @@ public class CropViewController: UIViewController {
         }
         
         delegate?.cropViewControllerDidCrop(self,
-                                                 cropped: image,
-                                                 transformation: cropResult.transformation,
-                                                 cropInfo: cropResult.cropInfo)        
+                                            cropped: image,
+                                            transformation: cropResult.transformation,
+                                            cropInfo: cropResult.cropInfo)
     }
 }
 
@@ -467,6 +514,7 @@ extension CropViewController {
         cropStackView?.translatesAutoresizingMaskIntoConstraints = false
         stackView?.translatesAutoresizingMaskIntoConstraints = false
         cropToolbar.translatesAutoresizingMaskIntoConstraints = false
+        mainToolbar.translatesAutoresizingMaskIntoConstraints = false
         cropView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView?.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -491,21 +539,27 @@ extension CropViewController {
         }
         
         stackView?.removeArrangedSubview(cropStackView)
+        stackView?.removeArrangedSubview(mainToolbar)
         stackView?.removeArrangedSubview(cropToolbar)
+        
         
         if Orientation.isPortrait || Orientation.isLandscapeRight {
             stackView?.addArrangedSubview(cropStackView)
             stackView?.addArrangedSubview(cropToolbar)
+            stackView?.addArrangedSubview(mainToolbar)
         } else if Orientation.isLandscapeLeft {
+            stackView?.addArrangedSubview(mainToolbar)
             stackView?.addArrangedSubview(cropToolbar)
             stackView?.addArrangedSubview(cropStackView)
         }
     }
-            
+    
     fileprivate func updateLayout() {
         setStackViewAxis()
         cropToolbar.respondToOrientationChange()
+        mainToolbar.respondToOrientationChange()
         changeStackViewOrder()
+        updateUI(for: state)
     }
 }
 
@@ -559,6 +613,28 @@ extension CropViewController: CropToolbarDelegate {
     
     public func didSelectAlterCropper90Degree() {
         handleAlterCropper90Degree()
+    }
+}
+
+extension CropViewController: MainToolbarDelegate {
+    public func didSelectBack() {
+        delegate?.cropViewControllerDidCancel(self, original: image)
+    }
+    
+    public func didSelectCropMode() {
+        changeState(to: .crop)
+    }
+    
+    public func didSelectPaintMode() {
+        print("didSelectPaint")
+    }
+    
+    public func didSelectColorControlMode() {
+        print("didSelectColorControl")
+    }
+    
+    public func didSelectSend() {
+        print("didSelectSend")
     }
 }
 

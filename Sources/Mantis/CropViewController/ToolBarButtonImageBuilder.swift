@@ -29,6 +29,7 @@
 import UIKit
 
 struct ToolBarButtonImageBuilder {
+
     static func rotateCCWImage() -> UIImage? {
         if #available(macCatalyst 13.1, iOS 13.0, *) {
             return UIImage(systemName: "rotate.left")

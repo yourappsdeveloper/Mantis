@@ -29,7 +29,7 @@ public class CropToolbar: UIView, CropToolbarProtocol {
 
     private lazy var clockwiseRotationButton: UIButton = {
         let button = createOptionButton(withTitle: nil, andAction: #selector(clockwiseRotate))
-        let icon = iconProvider?.getClockwiseRotationIcon() ?? ToolBarButtonImageBuilder.rotateCWImage()
+        let icon = iconProvider?.getClockwiseRotationIcon() ?? AssetManager.image("rotate.left")
         button.setImage(icon, for: .normal)
         return button
     }()
@@ -43,31 +43,23 @@ public class CropToolbar: UIView, CropToolbarProtocol {
 
     private lazy var fixedRatioSettingButton: UIButton = {
         let button = createOptionButton(withTitle: nil, andAction: #selector(setRatio))
-        let icon = iconProvider?.getSetRatioIcon() ?? ToolBarButtonImageBuilder.clampImage()
+        let icon = iconProvider?.getSetRatioIcon() ?? AssetManager.image("aspectratio")
         button.setImage(icon, for: .normal)
         return button
     }()
     
     private lazy var cancelButton: UIButton = {
-        if let icon = iconProvider?.getCancelIcon() {
-            let button = createOptionButton(withTitle: nil, andAction: #selector(cancel))
-            button.setImage(icon, for: .normal)
-            return button
-        }
-
-        let cancelText = LocalizedHelper.getString("Mantis.Cancel", value: "Cancel")
-        return createOptionButton(withTitle: cancelText, andAction: #selector(cancel))
+        let button = createOptionButton(withTitle: nil, andAction: #selector(cancel))
+        let icon = iconProvider?.getCancelIcon() ?? AssetManager.image("x.circle")
+        button.setImage(icon, for: .normal)
+        return button
     }()
 
     private lazy var cropButton: UIButton = {
-        if let icon = iconProvider?.getCropIcon() {
-            let button = createOptionButton(withTitle: nil, andAction: #selector(crop))
-            button.setImage(icon, for: .normal)
-            return button
-        }
-        
-        let doneText = LocalizedHelper.getString("Mantis.Done", value: "Done")
-        return createOptionButton(withTitle: doneText, andAction: #selector(crop))
+        let button = createOptionButton(withTitle: nil, andAction: #selector(crop))
+        let icon = iconProvider?.getCropIcon() ?? AssetManager.image("checkmark.circle")
+        button.setImage(icon, for: .normal)
+        return button
     }()
 
     private var resetButton: UIButton?
@@ -108,7 +100,7 @@ public class CropToolbar: UIView, CropToolbarProtocol {
         }
 
         if config.toolbarButtonOptions.contains(.reset) {
-            let icon = iconProvider?.getResetIcon() ?? ToolBarButtonImageBuilder.resetImage()
+            let icon = iconProvider?.getResetIcon() ?? AssetManager.image("arrow.triangle.2.circlepath")
             resetButton = createResetButton(with: icon)
             addButtonsToContainer(button: resetButton)
             resetButton?.isHidden = true
@@ -150,7 +142,7 @@ public class CropToolbar: UIView, CropToolbarProtocol {
     public func adjustLayoutWhenOrientationChange() {
         if Orientation.isPortrait {
             optionButtonStackView?.axis = .horizontal
-            optionButtonStackView?.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            optionButtonStackView?.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         } else {
             optionButtonStackView?.axis = .vertical
             optionButtonStackView?.layoutMargins = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
@@ -223,7 +215,7 @@ extension CropToolbar {
 
         let buttonFont = UIFont.systemFont(ofSize: buttonFontSize)
 
-        let button = UIButton(type: .system)
+        let button = UIButton(type: .custom)
         button.tintColor = config.foregroundColor
         button.titleLabel?.font = buttonFont
 
