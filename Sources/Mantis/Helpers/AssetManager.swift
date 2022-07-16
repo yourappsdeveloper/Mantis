@@ -5,6 +5,6 @@ class AssetManager {
 
   static func image(_ named: String) -> UIImage? {
     let bundle = Bundle(for: AssetManager.self)
-    return UIImage(named: "Images.bundle/\(named)", in: bundle, compatibleWith: nil)
+    return UIImage(named: "Mantis.bundle/\(named)", in: bundle, compatibleWith: nil)
   }
 }
