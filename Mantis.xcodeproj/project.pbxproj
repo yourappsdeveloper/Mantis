@@ -35,8 +35,8 @@
 		9A5743722881737400E6E51A /* MainToolbarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5743712881737400E6E51A /* MainToolbarProtocol.swift */; };
 		9A57437928817B2200E6E51A /* MainToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57437828817B2200E6E51A /* MainToolbar.swift */; };
 		9A57437F2881829700E6E51A /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57437E2881829700E6E51A /* AssetManager.swift */; };
-		A80D1B0B288342CF00EDEC6B /* Mantis.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9A57437C2881822500E6E51A /* Mantis.bundle */; };
 		A8B8B54928834823003633CE /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F5425D16A9E00C0DDB2 /* Resource.bundle */; };
+		A8B8B54C28834996003633CE /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8B8B54B28834996003633CE /* Images.bundle */; };
 		A8EF8B6E2883418300A424C4 /* MantisLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F3525D154D900C0DDB2 /* MantisLocalizable.strings */; };
 		FEDAAD8625205CC300D95667 /* RatioSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAD8525205CC300D95667 /* RatioSelector.swift */; };
 		FEDAAD8C25205DE900D95667 /* RatioItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAD8B25205DE900D95667 /* RatioItemView.swift */; };
@@ -144,8 +144,8 @@
 		9A57436F288167BA00E6E51A /* CropViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewConfig.swift; sourceTree = "<group>"; };
 		9A5743712881737400E6E51A /* MainToolbarProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToolbarProtocol.swift; sourceTree = "<group>"; };
 		9A57437828817B2200E6E51A /* MainToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToolbar.swift; sourceTree = "<group>"; };
-		9A57437C2881822500E6E51A /* Mantis.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Mantis.bundle; sourceTree = "<group>"; };
 		9A57437E2881829700E6E51A /* AssetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetManager.swift; sourceTree = "<group>"; };
+		A8B8B54B28834996003633CE /* Images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Images.bundle; sourceTree = "<group>"; };
 		E86127BD26206D01008365BC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MantisLocalizable.strings; sourceTree = "<group>"; };
 		FEDAAD8525205CC300D95667 /* RatioSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioSelector.swift; sourceTree = "<group>"; };
 		FEDAAD8B25205DE900D95667 /* RatioItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioItemView.swift; sourceTree = "<group>"; };
@@ -225,8 +225,8 @@
 		8EFB6F3425D154D900C0DDB2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9A57437C2881822500E6E51A /* Mantis.bundle */,
 				8EFB6F3525D154D900C0DDB2 /* MantisLocalizable.strings */,
+				A8B8B54B28834996003633CE /* Images.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -587,8 +587,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A80D1B0B288342CF00EDEC6B /* Mantis.bundle in Resources */,
 				8EFB6FB125D187A000C0DDB2 /* Resource.bundle in Resources */,
+				A8B8B54C28834996003633CE /* Images.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
