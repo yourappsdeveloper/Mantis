@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.swift_version = "5.0"
   s.ios.deployment_target = "11.0"
   s.source       = { :git => "https://github.com/guoyingtao/Mantis.git", :tag => "v#{s.version}" }
-  s.source_files  = "Sources/**/*.{h,swift}"
+  s.source_files  = "Sources/**/*}"
   s.resource_bundles = {
     "MantisResources" => ["Sources/**/*.lproj/*.strings", "Sources/**/*.bundle"]
   }
