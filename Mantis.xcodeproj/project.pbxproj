@@ -289,14 +289,6 @@
 			path = MainToolbar;
 			sourceTree = "<group>";
 		};
-		A8B8B55F2883551A003633CE /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A8B8B54D28834A52003633CE /* Images.bundle */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		OBJ_11 /* CropView */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,7 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
-				A8B8B55F2883551A003633CE /* Resources */,
+				A8B8B54D28834A52003633CE /* Images.bundle */,
 				OBJ_7 /* Sources */,
 				OBJ_50 /* Tests */,
 				9A5743592881664C00E6E51A /* Demo */,
