@@ -24,7 +24,9 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "11.0"
   s.source       = { :git => "https://github.com/guoyingtao/Mantis.git", :tag => "v#{s.version}" }
   s.source_files  = "Sources/**/*.{h,swift}"
-
+  s.resource_bundles = {
+    "MantisResources" => ["Sources/**/*.lproj/*.strings"]
+  }
   
   s.pod_target_xcconfig = {
     "PRODUCT_BUNDLE_IDENTIFIER": "com.echo.framework.Mantis"
