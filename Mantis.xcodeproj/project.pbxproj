@@ -37,6 +37,7 @@
 		9A57437F2881829700E6E51A /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57437E2881829700E6E51A /* AssetManager.swift */; };
 		A80D1B0B288342CF00EDEC6B /* Mantis.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9A57437C2881822500E6E51A /* Mantis.bundle */; };
 		A8B8B544288345B6003633CE /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8B8B543288345B6003633CE /* Media.xcassets */; };
+		A8B8B545288346A3003633CE /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8B8B543288345B6003633CE /* Media.xcassets */; };
 		A8EF8B6E2883418300A424C4 /* MantisLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F3525D154D900C0DDB2 /* MantisLocalizable.strings */; };
 		FEDAAD8625205CC300D95667 /* RatioSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAD8525205CC300D95667 /* RatioSelector.swift */; };
 		FEDAAD8C25205DE900D95667 /* RatioItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAD8B25205DE900D95667 /* RatioItemView.swift */; };
@@ -599,6 +600,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8B8B545288346A3003633CE /* Media.xcassets in Resources */,
 				A8EF8B6E2883418300A424C4 /* MantisLocalizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
