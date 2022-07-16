@@ -225,6 +225,7 @@
 		8EFB6F3425D154D900C0DDB2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A8B8B54D28834A52003633CE /* Images.bundle */,
 				8EFB6F3525D154D900C0DDB2 /* MantisLocalizable.strings */,
 			);
 			path = Resources;
@@ -432,7 +433,6 @@
 				OBJ_41 /* RatioOptions.swift */,
 				5FCE938624834C57002BBE65 /* CropToolbarButtonOptions.swift */,
 				5F69CC5D26C0629400568B75 /* Definition.swift */,
-				A8B8B54D28834A52003633CE /* Images.bundle */,
 				OBJ_10 /* Info.plist */,
 				OBJ_11 /* CropView */,
 				OBJ_23 /* CropViewController */,
