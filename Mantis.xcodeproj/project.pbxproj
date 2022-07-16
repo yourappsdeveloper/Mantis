@@ -37,7 +37,6 @@
 		9A57437F2881829700E6E51A /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57437E2881829700E6E51A /* AssetManager.swift */; };
 		A8B8B54928834823003633CE /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F5425D16A9E00C0DDB2 /* Resource.bundle */; };
 		A8B8B56028835543003633CE /* Mantis.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8B8B54D28834A52003633CE /* Mantis.bundle */; };
-		A8B8B56928835C15003633CE /* Mantis.bundle in Sources */ = {isa = PBXBuildFile; fileRef = A8B8B54D28834A52003633CE /* Mantis.bundle */; };
 		A8EF8B6E2883418300A424C4 /* MantisLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F3525D154D900C0DDB2 /* MantisLocalizable.strings */; };
 		FEDAAD8625205CC300D95667 /* RatioSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAD8525205CC300D95667 /* RatioSelector.swift */; };
 		FEDAAD8C25205DE900D95667 /* RatioItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAD8B25205DE900D95667 /* RatioItemView.swift */; };
@@ -653,7 +652,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				A8B8B56928835C15003633CE /* Mantis.bundle in Sources */,
 				9A57437928817B2200E6E51A /* MainToolbar.swift in Sources */,
 				OBJ_69 /* CropBoxFreeAspectFrameUpdater.swift in Sources */,
 				OBJ_70 /* CropBoxLockedAspectFrameUpdater.swift in Sources */,
@@ -1045,7 +1043,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.9.0;
+				MARKETING_VERSION = 1.10.0;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -1077,7 +1075,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.9.0;
+				MARKETING_VERSION = 1.10.0;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
