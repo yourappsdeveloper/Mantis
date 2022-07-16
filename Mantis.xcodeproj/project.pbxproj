@@ -38,6 +38,7 @@
 		A8B8B54928834823003633CE /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F5425D16A9E00C0DDB2 /* Resource.bundle */; };
 		A8B8B56028835543003633CE /* Images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8B8B54D28834A52003633CE /* Images.bundle */; };
 		A8B8B563288356E4003633CE /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8B8B562288356E4003633CE /* Media.xcassets */; };
+		A8B8B5642883576E003633CE /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8B8B562288356E4003633CE /* Media.xcassets */; };
 		A8EF8B6E2883418300A424C4 /* MantisLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F3525D154D900C0DDB2 /* MantisLocalizable.strings */; };
 		FEDAAD8625205CC300D95667 /* RatioSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAD8525205CC300D95667 /* RatioSelector.swift */; };
 		FEDAAD8C25205DE900D95667 /* RatioItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAD8B25205DE900D95667 /* RatioItemView.swift */; };
@@ -601,6 +602,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8B8B54928834823003633CE /* Resource.bundle in Resources */,
+				A8B8B5642883576E003633CE /* Media.xcassets in Resources */,
 				A8EF8B6E2883418300A424C4 /* MantisLocalizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
