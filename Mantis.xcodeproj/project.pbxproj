@@ -30,13 +30,14 @@
 		6659429F2877DC8A0096A5DB /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6659429E2877DC8A0096A5DB /* Enum.swift */; };
 		665942A12877DD1C0096A5DB /* TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665942A02877DD1C0096A5DB /* TypeAlias.swift */; };
 		66F909BF287D22E7007E2FC6 /* ToolBarButtonImageBuilder+DrawImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F909BE287D22E7007E2FC6 /* ToolBarButtonImageBuilder+DrawImage.swift */; };
-		8EFB6F6725D16B0F00C0DDB2 /* MantisLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F3525D154D900C0DDB2 /* MantisLocalizable.strings */; };
 		8EFB6FB125D187A000C0DDB2 /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F5425D16A9E00C0DDB2 /* Resource.bundle */; };
 		9A574370288167BA00E6E51A /* CropViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57436F288167BA00E6E51A /* CropViewConfig.swift */; };
 		9A5743722881737400E6E51A /* MainToolbarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A5743712881737400E6E51A /* MainToolbarProtocol.swift */; };
 		9A57437928817B2200E6E51A /* MainToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57437828817B2200E6E51A /* MainToolbar.swift */; };
 		9A57437F2881829700E6E51A /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57437E2881829700E6E51A /* AssetManager.swift */; };
-		A8EF8B6A288340F500A424C4 /* Mantis.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9A57437C2881822500E6E51A /* Mantis.bundle */; };
+		A8EF8B6E2883418300A424C4 /* MantisLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F3525D154D900C0DDB2 /* MantisLocalizable.strings */; };
+		A8EF8B702883419600A424C4 /* Mantis.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9A57437C2881822500E6E51A /* Mantis.bundle */; };
+		A8EF8B712883419700A424C4 /* Mantis.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9A57437C2881822500E6E51A /* Mantis.bundle */; };
 		FEDAAD8625205CC300D95667 /* RatioSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAD8525205CC300D95667 /* RatioSelector.swift */; };
 		FEDAAD8C25205DE900D95667 /* RatioItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAD8B25205DE900D95667 /* RatioItemView.swift */; };
 		OBJ_100 /* RotationDialPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* RotationDialPlate.swift */; };
@@ -587,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EFB6FB125D187A000C0DDB2 /* Resource.bundle in Resources */,
+				A8EF8B712883419700A424C4 /* Mantis.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,8 +596,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EFB6F6725D16B0F00C0DDB2 /* MantisLocalizable.strings in Resources */,
-				A8EF8B6A288340F500A424C4 /* Mantis.bundle in Resources */,
+				A8EF8B6E2883418300A424C4 /* MantisLocalizable.strings in Resources */,
+				A8EF8B702883419600A424C4 /* Mantis.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
