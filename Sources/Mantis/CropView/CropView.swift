@@ -331,14 +331,17 @@ class CropView: UIView {
     func resetImageStatusToPreviouState(completion: @escaping () -> Void) {
         guard let transformation = lastTransformation else { return }
 
+        if self.isFlippedOrientation {
+            imageContainer.image = imageContainer.image?.withHorizontallyFlippedOrientation()
+            isFlippedOrientation = false
+        }
+        
         resetRotation(to: transformation.rotationType) { [weak self] in
-            self?.transform(byTransformInfo: transformation)
-            self?.setupAngleDashboard()
+            guard let self = self else { return }
             
-            if self?.isFlippedOrientation ?? false {
-                self?.imageContainer.image = self?.imageContainer.image?.withHorizontallyFlippedOrientation()
-                self?.isFlippedOrientation = false
-            }
+            self.transform(byTransformInfo: transformation)
+            self.setupAngleDashboard()
+            self.aspectRatioLockEnabled = self.forceFixedRatio
             
             completion()
         }
@@ -347,7 +350,7 @@ class CropView: UIView {
     private func resetRotation(to type: ImageRotationType, completion: @escaping () -> Void = {}) {
         guard type != viewModel.rotationType else { completion(); return }
         
-        let stepsBack = Int((abs(viewModel.rotationType.rawValue) - abs(type.rawValue)) / 90)
+        let stepsBack = Int(abs((abs(viewModel.rotationType.rawValue) - abs(type.rawValue))) / 90)
         let rotateAngle = CGFloat.pi / 2
         let group = DispatchGroup()
         
