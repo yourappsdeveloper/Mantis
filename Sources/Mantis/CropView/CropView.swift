@@ -79,7 +79,8 @@ class CropView: UIView {
             manualZoomed: manualZoomed,
             intialMaskFrame: getInitialCropBoxRect(),
             maskFrame: gridOverlayView.frame,
-            scrollBounds: scrollView.bounds
+            scrollBounds: scrollView.bounds,
+            rotationType: viewModel.rotationType
         )
     }
 
@@ -326,8 +327,26 @@ class CropView: UIView {
     
     func resetImageStatusToPreviouState() {
         guard let transformation = lastTransformation else { return }
-        transform(byTransformInfo: transformation)
-        setupAngleDashboard()
+
+        resetRotation(to: transformation.rotationType) {
+            self.transform(byTransformInfo: transformation)
+            self.setupAngleDashboard()
+        }
+    }
+    
+    private func resetRotation(to type: ImageRotationType, completion: @escaping () -> Void = {}) {
+        guard type != viewModel.rotationType else { completion(); return }
+        
+        let stepsBack = Int((abs(viewModel.rotationType.rawValue) - abs(type.rawValue)) / 90)
+        let rotateAngle = CGFloat.pi / 2
+        let group = DispatchGroup()
+        
+        for _ in 1...stepsBack {
+            group.enter()
+            rotateBy90(rotateAngle: rotateAngle) {  group.leave() }
+        }
+        
+        group.notify(queue: .main) { completion() }
     }
     
     func updateCropBoxFrame(with point: CGPoint) {

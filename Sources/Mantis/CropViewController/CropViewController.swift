@@ -432,7 +432,8 @@ public class CropViewController: UIViewController {
                                              manualZoomed: manualZoomed,
                                              intialMaskFrame: .zero,
                                              maskFrame: maskFrame,
-                                             scrollBounds: .zero)
+                                             scrollBounds: .zero,
+                                             rotationType: .none)
         return transformantion
     }
 
