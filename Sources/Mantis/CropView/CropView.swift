@@ -52,6 +52,8 @@ class CropView: UIView {
     }
     
     var aspectRatioLockEnabled = false
+    var isFlippedOrientation = false
+
 
     // Referred to in extension
     let imageContainer: ImageContainer
@@ -80,7 +82,8 @@ class CropView: UIView {
             intialMaskFrame: getInitialCropBoxRect(),
             maskFrame: gridOverlayView.frame,
             scrollBounds: scrollView.bounds,
-            rotationType: viewModel.rotationType
+            rotationType: viewModel.rotationType,
+            isFlippedOrientation: isFlippedOrientation
         )
     }
 
@@ -331,6 +334,12 @@ class CropView: UIView {
         resetRotation(to: transformation.rotationType) { [weak self] in
             self?.transform(byTransformInfo: transformation)
             self?.setupAngleDashboard()
+            
+            if self?.isFlippedOrientation ?? false {
+                self?.imageContainer.image = self?.imageContainer.image?.withHorizontallyFlippedOrientation()
+                self?.isFlippedOrientation = false
+            }
+            
             completion()
         }
     }

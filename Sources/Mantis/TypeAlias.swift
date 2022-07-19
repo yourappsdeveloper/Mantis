@@ -33,6 +33,7 @@ public struct Transformation: Equatable {
     var maskFrame: CGRect
     var scrollBounds: CGRect
     var rotationType: ImageRotationType
+    var isFlippedOrientation: Bool
 }
 
 public typealias CropInfo = (

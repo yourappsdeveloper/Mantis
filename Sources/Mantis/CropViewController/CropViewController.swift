@@ -433,7 +433,8 @@ public class CropViewController: UIViewController {
                                              intialMaskFrame: .zero,
                                              maskFrame: maskFrame,
                                              scrollBounds: .zero,
-                                             rotationType: .none)
+                                             rotationType: .none,
+                                             isFlippedOrientation: false)
         return transformantion
     }
 
@@ -492,7 +493,8 @@ public class CropViewController: UIViewController {
     }
     
     private func handleFlipHorizontal() {
-        print("handleFlipHorizontal")
+        cropView.imageContainer.image = cropView.imageContainer.image?.withHorizontallyFlippedOrientation()
+        cropView.isFlippedOrientation = !cropView.isFlippedOrientation
     }
     
     private func handleAlterCropper90Degree() {
