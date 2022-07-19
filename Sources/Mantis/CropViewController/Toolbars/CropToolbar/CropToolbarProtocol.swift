@@ -10,6 +10,7 @@ import UIKit
 public protocol CropToolbarDelegate: AnyObject {
     func didSelectCancel()
     func didSelectCrop()
+    func flipHorizontal()    
     func didSelectCounterClockwiseRotate()
     func didSelectClockwiseRotate()
     func didSelectReset()

@@ -491,6 +491,10 @@ public class CropViewController: UIViewController {
         
     }
     
+    private func handleFlipHorizontal() {
+        print("handleFlipHorizontal")
+    }
+    
     private func handleAlterCropper90Degree() {
         let ratio = Double(cropView.gridOverlayView.frame.height / cropView.gridOverlayView.frame.width)
         
@@ -603,10 +607,15 @@ extension CropViewController: CropViewDelegate {
 }
 
 extension CropViewController: CropToolbarDelegate {
+    public func flipHorizontal() {
+        handleFlipHorizontal()
+    }
+    
 
     public func didSelectDiscardChanges() {
-        cropView.resetImageStatusToPreviouState()
-        // changeState(to: .main)
+        cropView.resetImageStatusToPreviouState { [weak self] in
+            self?.changeState(to: .main)
+        }
     }
     public func didSelectCancel() {
         if cropView.isImageTransformed {

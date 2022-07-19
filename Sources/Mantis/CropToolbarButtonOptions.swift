@@ -15,16 +15,16 @@ public struct CropToolbarButtonOptions: OptionSet {
     
     static public let counterclockwiseRotate = CropToolbarButtonOptions(rawValue: 1 << 0)
     static public let clockwiseRotate = CropToolbarButtonOptions(rawValue: 1 << 1)
-    static public let reset = CropToolbarButtonOptions(rawValue: 1 << 2)
+    static public let flipHorizontal = CropToolbarButtonOptions(rawValue: 1 << 2)
     static public let ratio = CropToolbarButtonOptions(rawValue: 1 << 3)
     static public let alterCropper90Degree = CropToolbarButtonOptions(rawValue: 1 << 4)
     
     static public let `default`: CropToolbarButtonOptions = [counterclockwiseRotate,
-                                                             reset,
+                                                             flipHorizontal,
                                                              ratio]
     
     static public let all: CropToolbarButtonOptions = [counterclockwiseRotate,
                                                        clockwiseRotate,
-                                                       reset,
+                                                       flipHorizontal,
                                                        ratio]
 }

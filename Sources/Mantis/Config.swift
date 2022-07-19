@@ -116,7 +116,7 @@ public struct MainToolbarConfig: MainToolbarConfigProtocol {
 
 // MARK: - CropToolbarConfig
 public struct CropToolbarConfig: CropToolbarConfigProtocol {
-    public var heightForVerticalOrientation: CGFloat = 44
+    public var heightForVerticalOrientation: CGFloat = 60
     public var widthForHorizontalOrientation: CGFloat = 80
 
     public var optionButtonFontSize: CGFloat = 14
@@ -126,7 +126,7 @@ public struct CropToolbarConfig: CropToolbarConfigProtocol {
      The color settings are not for Mac Catalyst (Optimize Interface for Mac) for now
      I haven't figured out a correct way to set button title color for this scenario
      */
-    public var backgroundColor: UIColor = .black
+    public var backgroundColor: UIColor = .clear
     public var foregroundColor: UIColor = .white
 
     public var toolbarButtonOptions: CropToolbarButtonOptions = .default
@@ -135,6 +135,11 @@ public struct CropToolbarConfig: CropToolbarConfigProtocol {
     public var presetRatiosButtonSelected = false
     public var includeFixedRatiosSettingButton = true
     public var mode: CropToolbarMode = .normal
+    
+    public var resetButtonFontSize: CGFloat = 14
+    public var resetButtonFontSizeForPad: CGFloat = 20
+    public var resetButtonColor: UIColor = .white
+    public var resetButtonTintColor: UIColor = .white
     
     public init() {}
 }

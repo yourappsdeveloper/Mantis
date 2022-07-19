@@ -325,12 +325,13 @@ class CropView: UIView {
         }
     }
     
-    func resetImageStatusToPreviouState() {
+    func resetImageStatusToPreviouState(completion: @escaping () -> Void) {
         guard let transformation = lastTransformation else { return }
 
-        resetRotation(to: transformation.rotationType) {
-            self.transform(byTransformInfo: transformation)
-            self.setupAngleDashboard()
+        resetRotation(to: transformation.rotationType) { [weak self] in
+            self?.transform(byTransformInfo: transformation)
+            self?.setupAngleDashboard()
+            completion()
         }
     }
     
@@ -743,20 +744,16 @@ extension CropView {
         }
     }
     
+    @objc
     func reset() {
         scrollView.removeFromSuperview()
         gridOverlayView.removeFromSuperview()
         rotationDial?.removeFromSuperview()
+        aspectRatioLockEnabled = forceFixedRatio
         
-        if forceFixedRatio {
-            aspectRatioLockEnabled = true
-        } else {
-            aspectRatioLockEnabled = false
-        }
-        
-        viewModel.reset(forceFixedRatio: forceFixedRatio)
-        resetUIFrame()
-        delegate?.cropViewDidBecomeUnResettable(self)
+        self.viewModel.reset(forceFixedRatio: self.forceFixedRatio)
+        self.resetUIFrame()
+        self.delegate?.cropViewDidBecomeUnResettable(self)
     }
     
     func prepareForDeviceRotation() {
