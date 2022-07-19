@@ -21,22 +21,22 @@ public struct DialConfig {
     public var orientation: Orientation = .normal
 
     public var backgroundColor: UIColor = .clear
-    public var bigScaleColor: UIColor = .lightGray
-    public var smallScaleColor: UIColor = .lightGray
-    public var indicatorColor: UIColor = .lightGray
-    public var numberColor: UIColor = .lightGray
-    public var centerAxisColor: UIColor = .lightGray
+    public var bigScaleColor: UIColor = .white
+    public var smallScaleColor: UIColor = .white
+    public var indicatorColor: UIColor = .white
+    public var numberColor: UIColor = .white
+    public var centerAxisColor: UIColor = .white
 
     public var theme: Theme = .dark {
         didSet {
             switch theme {
             case .dark:
                 backgroundColor = .clear
-                bigScaleColor = .lightGray
-                smallScaleColor = .lightGray
-                indicatorColor = .lightGray
-                numberColor = .lightGray
-                centerAxisColor = .lightGray
+                bigScaleColor = .white
+                smallScaleColor = .white
+                indicatorColor = .white
+                numberColor = .white
+                centerAxisColor = .white
             case .light:
                 backgroundColor = .clear
                 bigScaleColor = .darkGray

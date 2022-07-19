@@ -205,7 +205,7 @@ extension RotationDial {
     @discardableResult
     func rotateDialPlate(by angle: CGAngle) -> Bool {
         guard let dialPlate = dialPlate else { return false }
-        
+
         let radians = angle.radians
         if case .limit = dialConfig.rotationLimitType {
             if (getRotationAngle() * angle).radians > 0 && abs(getRotationAngle().radians + radians) >= angleLimit.radians {

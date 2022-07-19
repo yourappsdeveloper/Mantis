@@ -13,7 +13,11 @@ class CropMaskViewManager {
     fileprivate var visualEffectView: CropVisualEffectView!
     
     var cropShapeType: CropShapeType = .rect
-    var cropVisualEffectType: CropVisualEffectType = .blurDark
+    var cropVisualEffectType: CropVisualEffectType = .blurDark {
+        didSet {
+            visualEffectView.effectType = cropVisualEffectType
+        }
+    }
     
     init(with superview: UIView,
          cropRatio: CGFloat = 1.0,
@@ -24,6 +28,13 @@ class CropMaskViewManager {
         self.cropShapeType = cropShapeType
         self.cropVisualEffectType = cropVisualEffectType
     }
+    
+    
+    func setup(in view: UIView, cropRatio: CGFloat = 1.0) {
+        setupOverlayView(in: view, cropRatio: cropRatio)
+        setupTranslucencyView(in: view, cropRatio: cropRatio)
+    }
+    
     
     private func setupOverlayView(in view: UIView, cropRatio: CGFloat = 1.0) {
         dimmingView = CropDimmingView(cropShapeType: cropShapeType, cropRatio: cropRatio)
@@ -40,11 +51,6 @@ class CropMaskViewManager {
         view.addSubview(visualEffectView)
     }
 
-    func setup(in view: UIView, cropRatio: CGFloat = 1.0) {
-        setupOverlayView(in: view, cropRatio: cropRatio)
-        setupTranslucencyView(in: view, cropRatio: cropRatio)
-    }
-    
     func removeMaskViews() {
         dimmingView.removeFromSuperview()
         visualEffectView.removeFromSuperview()

@@ -24,15 +24,15 @@
 
 import UIKit
 
-public typealias Transformation = (
-    offset: CGPoint,
-    rotation: CGFloat,
-    scale: CGFloat,
-    manualZoomed: Bool,
-    intialMaskFrame: CGRect,
-    maskFrame: CGRect,
-    scrollBounds: CGRect
-)
+public struct Transformation: Equatable {
+    var offset: CGPoint
+    var rotation: CGFloat
+    var scale: CGFloat
+    var manualZoomed: Bool
+    var intialMaskFrame: CGRect
+    var maskFrame: CGRect
+    var scrollBounds: CGRect
+}
 
 public typealias CropInfo = (
     translation: CGPoint,

@@ -14,19 +14,27 @@ class CropVisualEffectView: UIVisualEffectView, CropMaskProtocol {
     var cropShapeType: CropShapeType = .rect
     var imageRatio: CGFloat = 1.0
     
+    var effectType: CropVisualEffectType = .blurDark {
+        didSet{
+            let (translucencyEffect, backgroundColor) = CropVisualEffectView.getEffect(byType: effectType)
+            self.translucencyEffect = translucencyEffect
+            self.effect = translucencyEffect
+            self.backgroundColor = backgroundColor
+
+        }
+    }
     fileprivate var translucencyEffect: UIVisualEffect?
     
     convenience init(cropShapeType: CropShapeType = .rect,
                      effectType: CropVisualEffectType = .blurDark,
                      cropRatio: CGFloat = 1.0) {
-        
         let (translucencyEffect, backgroundColor) = CropVisualEffectView.getEffect(byType: effectType)
         
         self.init(effect: translucencyEffect)
         self.cropShapeType = cropShapeType
         self.translucencyEffect = translucencyEffect
         self.backgroundColor = backgroundColor
-        
+
         initialize(cropRatio: cropRatio)
     }
         

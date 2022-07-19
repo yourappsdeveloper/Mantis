@@ -34,7 +34,6 @@ protocol CropViewDelegate: AnyObject {
 class CropView: UIView {
 
     public var dialConfig = Mantis.Config().dialConfig
-
     var cropShapeType: CropShapeType = .rect
     var cropVisualEffectType: CropVisualEffectType = .blurDark
     var angleDashboardHeight: CGFloat = 60
@@ -68,10 +67,49 @@ class CropView: UIView {
     var cropEnable = true
     var manualZoomed = false
     private var cropFrameKVO: NSKeyValueObservation?
+    private var lastTransformation: Transformation?
     var forceFixedRatio = false
     var imageStatusChangedCheckForForceFixedRatio = false
+    
+    private var currentTransformation: Transformation {
+        return Transformation(
+            offset: scrollView.contentOffset,
+            rotation: getTotalRadians(),
+            scale: scrollView.zoomScale,
+            manualZoomed: manualZoomed,
+            intialMaskFrame: getInitialCropBoxRect(),
+            maskFrame: gridOverlayView.frame,
+            scrollBounds: scrollView.bounds
+        )
+    }
 
     let cropViewConfig: CropViewConfig
+    
+    var isImageTransformed: Bool {
+        guard let transformation = lastTransformation, transformation != currentTransformation else { return false }
+        return true
+    }
+    
+    var imageStatusChanged: Bool {
+        if viewModel.getTotalRadians() != 0 { return true }
+        
+        if (forceFixedRatio) {
+            if imageStatusChangedCheckForForceFixedRatio {
+                imageStatusChangedCheckForForceFixedRatio = false
+                return scrollView.zoomScale != 1
+            }
+        }
+        
+        if !isTheSamePoint(p1: getImageLeftTopAnchorPoint(), p2: .zero) {
+            return true
+        }
+        
+        if !isTheSamePoint(p1: getImageRightBottomAnchorPoint(), p2: CGPoint(x: 1, y: 1)) {
+            return true
+        }
+        
+        return false
+    }
     
     deinit {
         print("CropView deinit.")
@@ -169,29 +207,8 @@ class CropView: UIView {
         return true
     }
     
-    private func imageStatusChanged() -> Bool {
-        if viewModel.getTotalRadians() != 0 { return true }
-        
-        if (forceFixedRatio) {
-            if imageStatusChangedCheckForForceFixedRatio {
-                imageStatusChangedCheckForForceFixedRatio = false
-                return scrollView.zoomScale != 1
-            }
-        }
-        
-        if !isTheSamePoint(p1: getImageLeftTopAnchorPoint(), p2: .zero) {
-            return true
-        }
-        
-        if !isTheSamePoint(p1: getImageRightBottomAnchorPoint(), p2: CGPoint(x: 1, y: 1)) {
-            return true
-        }
-        
-        return false
-    }
-    
     private func checkImageStatusChanged() {
-        if imageStatusChanged() {
+        if imageStatusChanged {
             delegate?.cropViewDidBecomeResettable(self)
         } else {
             delegate?.cropViewDidBecomeUnResettable(self)
@@ -226,6 +243,10 @@ class CropView: UIView {
         if aspectRatioLockEnabled {
             setFixedRatioCropBox()
         }
+    }
+    
+    func resetTransformation() {
+        lastTransformation = currentTransformation
     }
     
     func adaptForCropBox() {
@@ -303,6 +324,12 @@ class CropView: UIView {
         }
     }
     
+    func resetImageStatusToPreviouState() {
+        guard let transformation = lastTransformation else { return }
+        transform(byTransformInfo: transformation)
+        setupAngleDashboard()
+    }
+    
     func updateCropBoxFrame(with point: CGPoint) {
         let cropViewMinimumBoxSize = cropViewConfig.cropViewMinimumBoxSize
 
@@ -364,7 +391,6 @@ class CropView: UIView {
 extension CropView {
     private func rotateScrollView() {
         let totalRadians = forceFixedRatio ? viewModel.radians : viewModel.getTotalRadians()
-        
         self.scrollView.transform = CGAffineTransform(rotationAngle: totalRadians)
         self.updatePosition(by: totalRadians)
     }
@@ -565,16 +591,7 @@ extension CropView {
     func crop(_ image: UIImage) -> (croppedImage: UIImage?, transformation: Transformation, cropInfo: CropInfo) {
 
         let cropInfo = getCropInfo()
-        
-        let transformation = Transformation(
-            offset: scrollView.contentOffset,
-            rotation: getTotalRadians(),
-            scale: scrollView.zoomScale,
-            manualZoomed: manualZoomed,
-            intialMaskFrame: getInitialCropBoxRect(),
-            maskFrame: gridOverlayView.frame,
-            scrollBounds: scrollView.bounds
-        )
+        let transformation = currentTransformation
         
         guard let croppedImage = image.crop(by: cropInfo) else {
             return (nil, transformation, cropInfo)

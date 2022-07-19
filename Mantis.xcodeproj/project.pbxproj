@@ -35,6 +35,7 @@
 		9A57437928817B2200E6E51A /* MainToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57437828817B2200E6E51A /* MainToolbar.swift */; };
 		9A57437F2881829700E6E51A /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A57437E2881829700E6E51A /* AssetManager.swift */; };
 		9AE5C7C128858A4D001F1787 /* Mantis.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8B8B54D28834A52003633CE /* Mantis.bundle */; };
+		9AE5C7C32885C051001F1787 /* CGRectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE5C7C22885C051001F1787 /* CGRectExtension.swift */; };
 		A8060727288375D900A2D920 /* Mantis.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A8B8B54D28834A52003633CE /* Mantis.bundle */; };
 		A8B8B54928834823003633CE /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F5425D16A9E00C0DDB2 /* Resource.bundle */; };
 		A8EF8B6E2883418300A424C4 /* MantisLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB6F3525D154D900C0DDB2 /* MantisLocalizable.strings */; };
@@ -138,6 +139,7 @@
 		9AE5C7BB28858972001F1787 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AE5C7BC28858972001F1787 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9AE5C7BD28858972001F1787 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		9AE5C7C22885C051001F1787 /* CGRectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRectExtension.swift; sourceTree = "<group>"; };
 		A8B8B54D28834A52003633CE /* Mantis.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Mantis.bundle; sourceTree = "<group>"; };
 		E86127BD26206D01008365BC /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MantisLocalizable.strings; sourceTree = "<group>"; };
 		FEDAAD8525205CC300D95667 /* RatioSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioSelector.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				OBJ_30 /* CGImageExtensions.swift */,
 				OBJ_31 /* CoreGraphicsExtensions.swift */,
 				OBJ_32 /* UIImageExtensions.swift */,
+				9AE5C7C22885C051001F1787 /* CGRectExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -665,6 +668,7 @@
 				OBJ_83 /* RatioPresenter.swift in Sources */,
 				OBJ_84 /* ToolBarButtonImageBuilder.swift in Sources */,
 				5FCE938724834C57002BBE65 /* CropToolbarButtonOptions.swift in Sources */,
+				9AE5C7C32885C051001F1787 /* CGRectExtension.swift in Sources */,
 				OBJ_85 /* CGImageExtensions.swift in Sources */,
 				OBJ_86 /* CoreGraphicsExtensions.swift in Sources */,
 				5F69CC5E26C0629400568B75 /* Definition.swift in Sources */,

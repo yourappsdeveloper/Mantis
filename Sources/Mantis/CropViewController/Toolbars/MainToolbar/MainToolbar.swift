@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class MainToolbar: UIView, MainToolbarProtocol {
+public class MainToolbar: UIView {
     
     private(set) public var config: MainToolbarConfigProtocol?
     
@@ -45,7 +45,7 @@ public class MainToolbar: UIView, MainToolbarProtocol {
     
     private lazy var sendButton: UIButton = {
         let button = createOptionButton(withTitle: nil, andAction: #selector(send))
-        let icon = iconProvider?.getSendIcon() ?? AssetManager.image("arrow.up.circle.fill")
+        let icon = iconProvider?.getSendIcon() ?? AssetManager.image("arrow.up.circle.fill")?.withRenderingMode(.alwaysOriginal)
         button.setImage(icon, for: .normal)
         return button
     }()
@@ -71,6 +71,7 @@ public class MainToolbar: UIView, MainToolbarProtocol {
     public override var intrinsicContentSize: CGSize {
         let superSize = super.intrinsicContentSize
         guard let config = config else { return superSize }
+        self.config = config
 
         if Orientation.isPortrait {
             return CGSize(width: superSize.width, height: config.heightForVerticalOrientation)
@@ -171,5 +172,19 @@ extension MainToolbar {
                 optionButtonStackView?.addArrangedSubview(button)
             }
         }
+    }
+}
+
+// MainToolbarProtocol
+extension MainToolbar: MainToolbarProtocol {
+    
+    public func handleCropViewDidBecomeResettable() {
+        guard self.superview != nil else { return }
+        cropButton.tintColor = config?.buttonColorSeleced
+    }
+
+    public func handleCropViewDidBecomeUnResettable() {
+        guard self.superview != nil else { return }
+        cropButton.tintColor = config?.buttonColorNormal
     }
 }

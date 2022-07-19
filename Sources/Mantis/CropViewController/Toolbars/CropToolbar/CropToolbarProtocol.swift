@@ -13,6 +13,7 @@ public protocol CropToolbarDelegate: AnyObject {
     func didSelectCounterClockwiseRotate()
     func didSelectClockwiseRotate()
     func didSelectReset()
+    func didSelectDiscardChanges()
     func didSelectSetRatio()
     func didSelectRatio(ratio: Double)
     func didSelectAlterCropper90Degree()
@@ -57,6 +58,7 @@ public protocol CropToolbarProtocol: UIView {
         
     func handleCropViewDidBecomeResettable()
     func handleCropViewDidBecomeUnResettable()
+    func present(by viewController: UIViewController, in sourceView: UIView)
 }
 
 public extension CropToolbarProtocol {

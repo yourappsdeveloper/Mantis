@@ -86,6 +86,9 @@ public protocol MainToolbarConfigProtocol {
     var backgroundColor: UIColor { get set }
     var foregroundColor: UIColor { get set }
     
+    var buttonColorNormal: UIColor { get set }
+    var buttonColorSeleced: UIColor { get set }
+    
     var optionButtonFontSize: CGFloat { get set }
     var optionButtonFontSizeForPad: CGFloat { get set }
 }
@@ -104,6 +107,9 @@ public struct MainToolbarConfig: MainToolbarConfigProtocol {
      */
     public var backgroundColor: UIColor = .black
     public var foregroundColor: UIColor = .white
+    
+    public var buttonColorNormal: UIColor = .white
+    public var buttonColorSeleced: UIColor = .systemBlue
     
     public init() {}
 }

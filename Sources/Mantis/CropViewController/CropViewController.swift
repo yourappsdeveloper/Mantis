@@ -176,7 +176,7 @@ public class CropViewController: UIViewController {
     }
     
     private func updateUI(for state: CropViewControllerState) {
-        
+
         UIView.animate(withDuration: 0.25, delay: 0, options: []) { [weak self] in
             self?.mainToolbar.alpha = 0
             self?.cropToolbar.alpha = 0
@@ -184,7 +184,8 @@ public class CropViewController: UIViewController {
         } completion: { [weak self] _ in
             self?.mainToolbar.isHidden = true
             self?.cropToolbar.isHidden = true
-            
+            self?.cropView.cropMaskViewManager.cropVisualEffectType = .none
+
             switch state {
             case .main:
                 self?.mainToolbar.isHidden = false
@@ -192,10 +193,16 @@ public class CropViewController: UIViewController {
                 self?.setCropEnable(false)
                 
             case .crop:
+                self?.cropView.cropMaskViewManager.cropVisualEffectType = .blurDark
                 self?.cropToolbar.isHidden = false
                 self?.setCropEnable(true)
-                UIView.animate(withDuration: 0.25) { self?.cropToolbar.alpha = 1 }
                 
+                UIView.animate(withDuration: 0.25, delay: 0, options: []) {
+                    self?.cropToolbar.alpha = 1
+                } completion: { _ in
+                    self?.cropView.resetTransformation()
+                }
+
             case .paint:
                 break
                 
@@ -428,11 +435,7 @@ public class CropViewController: UIViewController {
                                              scrollBounds: .zero)
         return transformantion
     }
-    
-    private func handleCancel() {
-        changeState(to: .main)
-    }
-    
+
     private func resetRatioButton() {
         cropView.aspectRatioLockEnabled = false
         cropToolbar.handleFixedRatioUnSetted()
@@ -581,10 +584,12 @@ extension CropViewController: CropViewDelegate {
     
     func cropViewDidBecomeResettable(_ cropView: CropView) {
         cropToolbar.handleCropViewDidBecomeResettable()
+        mainToolbar.handleCropViewDidBecomeResettable()
     }
     
     func cropViewDidBecomeUnResettable(_ cropView: CropView) {
         cropToolbar.handleCropViewDidBecomeUnResettable()
+        mainToolbar.handleCropViewDidBecomeUnResettable()
     }
     
     func cropViewDidBeginResize(_ cropView: CropView) {
@@ -597,12 +602,22 @@ extension CropViewController: CropViewDelegate {
 }
 
 extension CropViewController: CropToolbarDelegate {
+
+    public func didSelectDiscardChanges() {
+        cropView.resetImageStatusToPreviouState()
+        // changeState(to: .main)
+    }
     public func didSelectCancel() {
-        handleCancel()
+        if cropView.isImageTransformed {
+            cropToolbar.present(by: self, in: cropView)
+        } else {
+            changeState(to: .main)
+        }
     }
     
     public func didSelectCrop() {
-        handleCrop()
+       // handleCrop()
+        changeState(to: .main)
     }
     
     public func didSelectCounterClockwiseRotate() {

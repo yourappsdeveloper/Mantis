@@ -79,8 +79,4 @@ public extension MainToolbarProtocol {
     }
     
     func adjustLayoutWhenOrientationChange() {}
-    
-    func handleCropViewDidBecomeResettable() {}
-    
-    func handleCropViewDidBecomeUnResettable() {}
 }

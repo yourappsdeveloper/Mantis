@@ -168,6 +168,25 @@ public class CropToolbar: UIView, CropToolbarProtocol {
     public func handleCropViewDidBecomeUnResettable() {
         resetButton?.isHidden = true
     }
+    
+    public func present(by viewController: UIViewController, in sourceView: UIView) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let discardAction = UIAlertAction(title: LocalizedHelper.getString("Mantis.Crop.Discard", value: "Discard Cahnges"),
+                                          style: .default) { [weak self] _ in
+            self?.cropToolbarDelegate?.didSelectDiscardChanges()
+        }
+        
+        actionSheet.addAction(discardAction)
+        
+        actionSheet.handlePopupInBigScreenIfNeeded(sourceView: sourceView)
+
+        let cancelText = LocalizedHelper.getString("Mantis.Cancel", value: "Cancel")
+        let cancelAction = UIAlertAction(title: cancelText, style: .cancel)
+        actionSheet.addAction(cancelAction)
+
+        viewController.present(actionSheet, animated: true)
+    }
 }
 
 // Objc functions
