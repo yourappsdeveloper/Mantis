@@ -176,8 +176,25 @@ public class CropViewController: UIViewController {
     }
     
     private func updateUI(for state: CropViewControllerState) {
+        let animateDuration = 0.3
+        
+        UIView.animate(withDuration: animateDuration) { [weak self] in
+            self?.setCropEnable(false)
 
-        UIView.animate(withDuration: 0.25, delay: 0, options: []) { [weak self] in
+            switch state {
+            case .main:
+                break
+            case .crop:
+                self?.setCropEnable(true)
+            case .paint:
+                break
+            case .colorControl:
+                break
+            }
+        }
+        
+
+        UIView.animate(withDuration: (animateDuration / 2), delay: 0, options: []) { [weak self] in
             self?.mainToolbar.alpha = 0
             self?.cropToolbar.alpha = 0
             
@@ -189,15 +206,13 @@ public class CropViewController: UIViewController {
             switch state {
             case .main:
                 self?.mainToolbar.isHidden = false
-                UIView.animate(withDuration: 0.25) { self?.mainToolbar.alpha = 1 }
-                self?.setCropEnable(false)
+                UIView.animate(withDuration: (animateDuration / 2)) { self?.mainToolbar.alpha = 1 }
                 
             case .crop:
                 self?.cropView.cropMaskViewManager.cropVisualEffectType = .blurDark
                 self?.cropToolbar.isHidden = false
-                self?.setCropEnable(true)
                 
-                UIView.animate(withDuration: 0.25, delay: 0, options: []) {
+                UIView.animate(withDuration: (animateDuration / 2), delay: 0, options: []) {
                     self?.cropToolbar.alpha = 1
                 } completion: { _ in
                     self?.cropView.resetTransformation()
@@ -213,8 +228,8 @@ public class CropViewController: UIViewController {
     }
     
     private func setCropEnable(_ isEnable: Bool) {
-        cropView.gridOverlayView.isHidden = !isEnable
-        cropView.rotationDial?.isHidden = !isEnable
+        cropView.gridOverlayView.alpha = isEnable ? 1.0 : 0
+        cropView.rotationDial?.alpha = isEnable ? 1.0 : 0
         cropView.scrollView.isScrollEnabled = isEnable
         cropView.angleDashboardHeight = isEnable ? 60 : 0
         cropView.cropEnable = isEnable
