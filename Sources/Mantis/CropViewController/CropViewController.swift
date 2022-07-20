@@ -230,7 +230,6 @@ public class CropViewController: UIViewController {
     private func setCropEnable(_ isEnable: Bool) {
         cropView.gridOverlayView.alpha = isEnable ? 1.0 : 0
         cropView.rotationDial?.alpha = isEnable ? 1.0 : 0
-        cropView.scrollView.isScrollEnabled = isEnable
         cropView.angleDashboardHeight = isEnable ? 60 : 0
         cropView.cropEnable = isEnable
         if isEnable { rotated() }

@@ -347,9 +347,15 @@ class CropView: UIView {
             guard let self = self else { return }
             
             self.transform(byTransformInfo: transformation)
-            self.setupAngleDashboard()
             self.aspectRatioLockEnabled = self.forceFixedRatio
             self.setupAngleDashboard()
+            
+            if self.forceFixedRatio {
+                let oldRadians = self.viewModel.getTotalRadias(by: transformation.rotation)
+                self.viewModel.setRotatingStatus(by: CGAngle(radians: oldRadians))
+            } else {
+                self.viewModel.setRotatingStatus(by: CGAngle(radians: transformation.rotation))
+            }
             
             self.delegate?.cropViewDidResetTransformation(self)
             completion()
