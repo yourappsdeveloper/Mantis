@@ -349,6 +349,7 @@ class CropView: UIView {
             self.transform(byTransformInfo: transformation)
             self.setupAngleDashboard()
             self.aspectRatioLockEnabled = self.forceFixedRatio
+            self.setupAngleDashboard()
             
             self.delegate?.cropViewDidResetTransformation(self)
             completion()
