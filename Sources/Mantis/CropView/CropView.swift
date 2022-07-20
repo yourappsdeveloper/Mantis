@@ -358,12 +358,12 @@ class CropView: UIView {
     
     private func resetRotation(to type: ImageRotationType, completion: @escaping () -> Void = {}) {
         guard type != viewModel.rotationType else { completion(); return }
-        
+
         let stepsBack = Int(abs((abs(viewModel.rotationType.rawValue) - abs(type.rawValue))) / 90)
         let rotateAngle = CGFloat.pi / 2
         let group = DispatchGroup()
         
-        for _ in 1...stepsBack {
+        for _ in 0..<stepsBack {
             group.enter()
             rotateBy90(rotateAngle: rotateAngle) {  group.leave() }
         }
