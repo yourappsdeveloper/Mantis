@@ -25,6 +25,7 @@
 import UIKit
 
 protocol CropViewDelegate: AnyObject {
+    func cropViewDidResetTransformation(_ cropView: CropView)
     func cropViewDidBecomeResettable(_ cropView: CropView)
     func cropViewDidBecomeUnResettable(_ cropView: CropView)
     func cropViewDidBeginResize(_ cropView: CropView)
@@ -249,6 +250,12 @@ class CropView: UIView {
         }
     }
     
+    func flipHorizontal() {
+        isFlippedOrientation = !isFlippedOrientation
+        imageContainer.image = imageContainer.image?.withHorizontallyFlippedOrientation()
+        if isFlippedOrientation { self.delegate?.cropViewDidBecomeResettable(self) }
+    }
+    
     func resetTransformation() {
         lastTransformation = currentTransformation
     }
@@ -331,9 +338,9 @@ class CropView: UIView {
     func resetImageStatusToPreviouState(completion: @escaping () -> Void) {
         guard let transformation = lastTransformation else { return }
 
-        if self.isFlippedOrientation {
+        if let isFlipped = lastTransformation?.isFlippedOrientation, isFlipped != isFlippedOrientation {
             imageContainer.image = imageContainer.image?.withHorizontallyFlippedOrientation()
-            isFlippedOrientation = false
+            isFlippedOrientation = isFlipped
         }
         
         resetRotation(to: transformation.rotationType) { [weak self] in
@@ -343,6 +350,7 @@ class CropView: UIView {
             self.setupAngleDashboard()
             self.aspectRatioLockEnabled = self.forceFixedRatio
             
+            self.delegate?.cropViewDidResetTransformation(self)
             completion()
         }
     }
@@ -762,6 +770,7 @@ extension CropView {
         gridOverlayView.removeFromSuperview()
         rotationDial?.removeFromSuperview()
         aspectRatioLockEnabled = forceFixedRatio
+        isFlippedOrientation = false
         
         self.viewModel.reset(forceFixedRatio: self.forceFixedRatio)
         self.resetUIFrame()

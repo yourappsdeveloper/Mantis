@@ -14,13 +14,14 @@ public enum CropToolbarMode {
 }
 
 public class CropToolbar: UIView, CropToolbarProtocol {
+
     private(set) public var config: CropToolbarConfigProtocol?
     
     public var iconProvider: CropToolbarIconProvider?
     
     public weak var cropToolbarDelegate: CropToolbarDelegate?
     
-    lazy var resetButtonNew: UIButton = {
+    lazy var resetButton: UIButton = {
         let config = config as! CropToolbarConfig
         
         let buttonFontSize: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ?
@@ -82,7 +83,7 @@ public class CropToolbar: UIView, CropToolbarProtocol {
         return button
     }()
 
-    private lazy var flipHorizontalButton: UIButton = {
+    lazy var flipHorizontalButton: UIButton = {
         let button = createOptionButton(withTitle: nil, andAction: #selector(flipHorizontal))
         let icon = iconProvider?.getCropIcon() ?? AssetManager.image("flip.horizontal")
         button.setImage(icon, for: .normal)
@@ -171,7 +172,12 @@ public class CropToolbar: UIView, CropToolbarProtocol {
             optionButtonStackView?.layoutMargins = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
         }
     }
-
+    
+    public func handleFlipHorizontal(isSlected: Bool) {
+        guard let config = config as? CropToolbarConfig else { return }
+        flipHorizontalButton.tintColor = isSlected ? config.buttonColorSeleced : config.buttonColorNormal
+    }
+    
     public func handleFixedRatioSetted(ratio: Double) {
         fixedRatioSettingButton.tintColor = nil
     }
@@ -188,6 +194,8 @@ public class CropToolbar: UIView, CropToolbarProtocol {
     }
 
     public func handleCropViewDidBecomeUnResettable() {
+        guard let config = config as? CropToolbarConfig else { return }
+        flipHorizontalButton.tintColor = config.buttonColorNormal
     }
     
     public func present(by viewController: UIViewController, in sourceView: UIView) {
@@ -289,7 +297,7 @@ extension CropToolbar {
         optionButtonStackView = UIStackView()
         containerStackView = UIStackView()
         
-        containerStackView?.addArrangedSubview(resetButtonNew)
+        containerStackView?.addArrangedSubview(resetButton)
         containerStackView?.addArrangedSubview(optionButtonStackView!)
         
         addSubview(containerStackView!)

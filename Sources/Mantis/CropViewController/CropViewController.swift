@@ -493,8 +493,8 @@ public class CropViewController: UIViewController {
     }
     
     private func handleFlipHorizontal() {
-        cropView.imageContainer.image = cropView.imageContainer.image?.withHorizontallyFlippedOrientation()
-        cropView.isFlippedOrientation = !cropView.isFlippedOrientation
+        cropView.flipHorizontal()
+        cropToolbar.handleFlipHorizontal(isSlected: cropView.isFlippedOrientation)
     }
     
     private func handleAlterCropper90Degree() {
@@ -588,6 +588,9 @@ extension CropViewController {
 }
 
 extension CropViewController: CropViewDelegate {
+    func cropViewDidResetTransformation(_ cropView: CropView) {
+        cropToolbar.handleFlipHorizontal(isSlected: cropView.isFlippedOrientation)
+    }
     
     func cropViewDidBecomeResettable(_ cropView: CropView) {
         cropToolbar.handleCropViewDidBecomeResettable()

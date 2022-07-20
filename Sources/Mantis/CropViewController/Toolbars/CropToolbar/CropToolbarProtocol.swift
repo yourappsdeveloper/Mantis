@@ -57,9 +57,12 @@ public protocol CropToolbarProtocol: UIView {
     func respondToOrientationChange()
     func adjustLayoutWhenOrientationChange()
         
+    func handleFlipHorizontal(isSlected: Bool)
+
+    func present(by viewController: UIViewController, in sourceView: UIView)
+    
     func handleCropViewDidBecomeResettable()
     func handleCropViewDidBecomeUnResettable()
-    func present(by viewController: UIViewController, in sourceView: UIView)
 }
 
 public extension CropToolbarProtocol {
@@ -90,10 +93,6 @@ public extension CropToolbarProtocol {
         adjustIntrinsicContentSize()
         adjustLayoutWhenOrientationChange()
     }
-    
-    func adjustLayoutWhenOrientationChange() {}
-    
-    func handleCropViewDidBecomeResettable() {}
-    
-    func handleCropViewDidBecomeUnResettable() {}
+        
+
 }

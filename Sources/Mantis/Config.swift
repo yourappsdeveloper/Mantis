@@ -128,6 +128,9 @@ public struct CropToolbarConfig: CropToolbarConfigProtocol {
      */
     public var backgroundColor: UIColor = .clear
     public var foregroundColor: UIColor = .white
+    
+    public var buttonColorNormal: UIColor = .white
+    public var buttonColorSeleced: UIColor = .systemBlue
 
     public var toolbarButtonOptions: CropToolbarButtonOptions = .default
     public var ratioCandidatesShowType: RatioCandidatesShowType = .presentRatioListFromButton
