@@ -316,14 +316,12 @@ public class CropViewController: UIViewController {
     }
     
     private func createCropView() {
-        if !config.showRotationDial {
-            cropView.angleDashboardHeight = 0
-        }
+        cropView.angleDashboardHeight = config.showRotationDial ? 60 : 0
         cropView.delegate = self
         cropView.clipsToBounds = true
         cropView.cropShapeType = config.cropShapeType
         cropView.cropVisualEffectType = config.cropVisualEffectType
-        
+
         if case .alwaysUsingOnePresetFixedRatio = config.presetFixedRatioType {
             cropView.forceFixedRatio = true
         } else {
@@ -631,7 +629,6 @@ extension CropViewController: CropToolbarDelegate {
     }
     
     public func didSelectCrop() {
-       // handleCrop()
         changeState(to: .main)
     }
     
@@ -678,7 +675,7 @@ extension CropViewController: MainToolbarDelegate {
     }
     
     public func didSelectSend() {
-        print("didSelectSend")
+        handleCrop()
     }
 }
 
