@@ -297,7 +297,7 @@ class CropView: UIView {
         self.rotationDial = rotationDial
         rotationDial.isUserInteractionEnabled = true
         addSubview(rotationDial)
-        
+
         rotationDial.setRotationCenter(by: gridOverlayView.center, of: self)
         
         rotationDial.didRotate = { [unowned self] angle in
@@ -365,7 +365,7 @@ class CropView: UIView {
         
         for _ in 0..<stepsBack {
             group.enter()
-            rotateBy90(rotateAngle: rotateAngle) {  group.leave() }
+            rotateBy90(rotateAngle: rotateAngle, rorateDuration: 0) {  group.leave() }
         }
         
         group.notify(queue: .main) { completion() }
@@ -723,9 +723,8 @@ extension CropView {
         }
     }
     
-    func rotateBy90(rotateAngle: CGFloat, completion: @escaping ()->Void = {}) {
+    func rotateBy90(rotateAngle: CGFloat, rorateDuration: Double = 0.25, completion: @escaping ()->Void = {}) {
         viewModel.setDegree90RotatingStatus()
-        let rorateDuration = 0.25
         
         if forceFixedRatio {
             viewModel.setRotatingStatus(by: CGAngle(radians: viewModel.radians))
