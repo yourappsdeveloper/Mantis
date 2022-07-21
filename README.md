@@ -244,5 +244,19 @@ Mantis provide two demo projects
 * Thanks [Leo Dabus](https://stackoverflow.com/users/2303865/leo-dabus) for helping me to solve the problem of cropping an ellipse image with transparent background https://stackoverflow.com/a/59805317/288724
 * <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
+// Materials
 
+ •    Crop / rotete:
+       - https://github.com/guoyingtao/Mantis
 
+ •    Painting on Image:
+       - https://www.raywenderlich.com/5895-uikit-drawing-tutorial-how-to-make-a-simple-drawing-app
+       - https://betterprogramming.pub/drawing-in-an-uiview-4bc754483242
+       - eraser: https://stackoverflow.com/questions/45879252/draw-a-line-that-acts-like-an-eraser-swift3
+
+ •    StickerTextView:  - https://github.com/Textcat/JLStickerTextView
+ 
+ •    Edit Contrast, Brightness…:
+       - https://stackoverflow.com/questions/51938562/how-to-change-brightness-contrast-and-saturation-using-cicolorcontrols-via-uisl
+       - https://github.com/InfyOmLabs/ImageAdjusts
+ 
